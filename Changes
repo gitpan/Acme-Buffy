@@ -1,5 +1,9 @@
 Revision history for Perl extension Buffy
 
+1.2    Sun Aug 12 12:52:17 BST 2001
+        - merged in patch by Brian Ingerson which moved code
+          to an import subroutine
+
 1.1    Wed May 23 16:46:45 BST 2001
         - Changed name to Acme::Buffy
 

@@ -1,4 +1,4 @@
-package Acme::Buffy; $VERSION = '1.1';
+package Acme::Buffy; $VERSION = '1.2';
 my $horns = "BUffY bUFFY " x 2;
 sub slay {
   my $willow = unpack "b*", pop;
@@ -26,13 +26,15 @@ sub evil {
 sub punch {
   $_[0] =~ /^$horns/
 }
-open 0 or print "Can't rebuffy '$0'\n" and exit;
-(my $demon = join "", <0>) =~ s/.*^\s*use\s+Acme::Buffy\s*;\n//sm;
-local $SIG{__WARN__} = \&evil;
-do {eval unslay $demon; exit} unless evil $demon && not punch $demon;
-open 0, ">$0" or print "Cannot buffy '$0'\n" and exit;
-print {0} "use Acme::Buffy;\n", slay $demon and exit;
-print "use Acme::Buffy;\n", slay $demon and exit;
+sub import {
+  open 0 or print "Can't rebuffy '$0'\n" and exit;
+  (my $demon = join "", <0>) =~ s/.*^\s*use\s+Acme::Buffy\s*;\n//sm;
+  local $SIG{__WARN__} = \&evil;
+  do {eval unslay $demon; exit} unless evil $demon && not punch $demon;
+  open 0, ">$0" or print "Cannot buffy '$0'\n" and exit;
+  print {0} "use Acme::Buffy;\n", slay $demon and exit;
+  print "use Acme::Buffy;\n", slay $demon and exit;
+}
 __END__
 
 =head1 NAME
