@@ -1,0 +1,8 @@
+Revision history for Perl extension Buffy
+
+1.1    Wed May 23 16:46:45 BST 2001
+        - Changed name to Acme::Buffy
+
+1.00	Sun Apr  1 13:20:37 BST 2001
+
+	- original version
