@@ -2,5 +2,5 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(
 		NAME	=> 'Acme::Buffy',
-		VERSION => '1.2',
+                VERSION_FROM => 'lib/Acme/Buffy.pm',
 	     );

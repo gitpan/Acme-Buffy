@@ -1,4 +1,5 @@
-package Acme::Buffy; $VERSION = '1.2';
+package Acme::Buffy;
+$VERSION = '1.3';
 my $horns = "BUffY bUFFY " x 2;
 sub slay {
   my $willow = unpack "b*", pop;
