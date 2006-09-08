@@ -1,9 +1,12 @@
-Changes
-MANIFEST
-Makefile.PL
-README
 buffy
+CHANGES
 demo_buffy.pl
 demo_simple.pl
 lib/Acme/Buffy.pm
+Makefile.PL
+MANIFEST
+README
 t/buffy.t
+t/pod.t
+t/pod_coverage.t
+META.yml                                 Module meta-data (added by MakeMaker)

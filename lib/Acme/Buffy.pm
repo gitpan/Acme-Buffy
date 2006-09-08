@@ -1,41 +1,53 @@
 package Acme::Buffy;
-$VERSION = '1.3';
+use strict;
+use warnings;
+our $VERSION = '1.4';
+
 my $horns = "BUffY bUFFY " x 2;
-sub slay {
-  my $willow = unpack "b*", pop;
-  my @buffy = ('b', 'u', 'f', 'f', 'y', ' ');
-  my @BUFFY = ('B', 'U', 'F', 'F', 'Y', "\t");
-  my $demons = $horns;
-  foreach (split //, $willow) {
-    $demons .= $_ ? $BUFFY[$i] : $buffy[$i];
-    $i++; $i = 0 if $i > 5;
-  }
-  $demons;
+my $i     = 0;
+
+sub _slay {
+    my $willow = unpack "b*", pop;
+    my @buffy = ( 'b', 'u', 'f', 'f', 'y', ' ' );
+    my @BUFFY = ( 'B', 'U', 'F', 'F', 'Y', "\t" );
+    my $demons = $horns;
+    foreach ( split //, $willow ) {
+        $demons .= $_ ? $BUFFY[$i] : $buffy[$i];
+        $i++;
+        $i = 0 if $i > 5;
+    }
+    $demons;
 }
-sub unslay {
-  my $demons = pop;
-  $demons =~ s/^$horns//g;
-  my @willow;
-  foreach (split //, $demons) {
-    push @willow, /[buffy ]/ ? 0 : 1;
-  }
-  pack "b*", join '', @willow;
+
+sub _unslay {
+    my $demons = pop;
+    $demons =~ s/^$horns//g;
+    my @willow;
+    foreach ( split //, $demons ) {
+        push @willow, /[buffy ]/ ? 0 : 1;
+    }
+    pack "b*", join '', @willow;
 }
-sub evil {
-  $_[0] =~ /\S/
+
+sub _evil {
+    $_[0] =~ /\S/;
 }
-sub punch {
-  $_[0] =~ /^$horns/
+
+sub _punch {
+    $_[0] =~ /^$horns/;
 }
+
 sub import {
-  open 0 or print "Can't rebuffy '$0'\n" and exit;
-  (my $demon = join "", <0>) =~ s/.*^\s*use\s+Acme::Buffy\s*;\n//sm;
-  local $SIG{__WARN__} = \&evil;
-  do {eval unslay $demon; exit} unless evil $demon && not punch $demon;
-  open 0, ">$0" or print "Cannot buffy '$0'\n" and exit;
-  print {0} "use Acme::Buffy;\n", slay $demon and exit;
-  print "use Acme::Buffy;\n", slay $demon and exit;
+    open 0 or print "Can't rebuffy '$0'\n" and exit;
+    ( my $demon = join "", <0> ) =~ s/.*^\s*use\s+Acme::Buffy\s*;\n//sm;
+    local $SIG{__WARN__} = \&evil;
+    do { eval _unslay $demon; exit } unless _evil $demon && not _punch $demon;
+    open my $fh, ">$0" or print "Cannot buffy '$0'\n" and exit;
+    print $fh "use Acme::Buffy;\n", _slay $demon and exit;
+    print "use Acme::Buffy;\n", _slay $demon and exit;
 }
+"Grrr, arrrgh";
+
 __END__
 
 =head1 NAME
@@ -61,13 +73,11 @@ this:
 
 =head1 DIAGNOSTICS
 
-=over 4
-
-=item C<Can't buffy '%s'>
+=head2 C<Can't buffy '%s'>
 
 Acme::Buffy could not access the source file to modify it.
 
-=item C<Can't rebuffy '%s'>
+=head2 C<Can't rebuffy '%s'>
 
 Acme::Buffy could not access the source file to execute it.
 
