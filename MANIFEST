@@ -1,12 +1,15 @@
 buffy
 CHANGES
-demo_buffy.pl
-demo_simple.pl
+examples/demo_buffy.pl
+examples/demo_simple.pl
 lib/Acme/Buffy.pm
+LICENSE
 Makefile.PL
 MANIFEST
 README
 t/buffy.t
+t/critic.t
+t/perlcriticrc
 t/pod.t
 t/pod_coverage.t
 META.yml                                 Module meta-data (added by MakeMaker)

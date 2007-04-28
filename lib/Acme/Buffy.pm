@@ -1,7 +1,7 @@
 package Acme::Buffy;
 use strict;
 use warnings;
-our $VERSION = '1.4';
+our $VERSION = '1.5';
 
 my $horns = "BUffY bUFFY " x 2;
 my $i     = 0;
@@ -16,7 +16,7 @@ sub _slay {
         $i++;
         $i = 0 if $i > 5;
     }
-    $demons;
+    return $demons;
 }
 
 sub _unslay {
@@ -26,25 +26,27 @@ sub _unslay {
     foreach ( split //, $demons ) {
         push @willow, /[buffy ]/ ? 0 : 1;
     }
-    pack "b*", join '', @willow;
+    return pack "b*", join '', @willow;
 }
 
 sub _evil {
-    $_[0] =~ /\S/;
+    return $_[0] =~ /\S/;
 }
 
 sub _punch {
-    $_[0] =~ /^$horns/;
+    return $_[0] =~ /^$horns/;
 }
 
 sub import {
     open 0 or print "Can't rebuffy '$0'\n" and exit;
     ( my $demon = join "", <0> ) =~ s/.*^\s*use\s+Acme::Buffy\s*;\n//sm;
     local $SIG{__WARN__} = \&evil;
-    do { eval _unslay $demon; exit } unless _evil $demon && not _punch $demon;
+    do { eval _unslay $demon; exit }
+        unless _evil $demon and not _punch $demon;
     open my $fh, ">$0" or print "Cannot buffy '$0'\n" and exit;
     print $fh "use Acme::Buffy;\n", _slay $demon and exit;
     print "use Acme::Buffy;\n", _slay $demon and exit;
+    return;
 }
 "Grrr, arrrgh";
 
@@ -97,3 +99,4 @@ Copyright (c) 2001, Leon Brocard. All Rights Reserved.  This module is
 free software. It may be used, redistributed and/or modified under the
 terms of the Perl Artistic License (see
 http://www.perl.com/perl/misc/Artistic.html)
+
