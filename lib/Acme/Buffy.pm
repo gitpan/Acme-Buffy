@@ -1,7 +1,7 @@
 package Acme::Buffy;
 use strict;
 use warnings;
-our $VERSION = '1.5';
+our $VERSION = '1.6';
 
 my $horns = "BUffY bUFFY " x 2;
 my $i     = 0;

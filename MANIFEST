@@ -8,8 +8,4 @@ Makefile.PL
 MANIFEST
 README
 t/buffy.t
-t/critic.t
-t/perlcriticrc
-t/pod.t
-t/pod_coverage.t
 META.yml                                 Module meta-data (added by MakeMaker)

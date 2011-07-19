@@ -1,5 +1,8 @@
 Revision history for Perl extension Buffy
 
+1.6 Tue Jul 19 10:56:52 BST 2011
+    - remove pod, perlcritic tests
+
 1.5 Sat Apr 28 15:56:29 CEST 2007
     - perltidy
     - move examples to examples directory
